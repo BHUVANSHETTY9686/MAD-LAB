@@ -1,0 +1,46 @@
+package com.example.lab5_4mt19cs038;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+    Button startbtn,stopbtn;
+    TextView count;
+    int i=1;
+    Handler customhandler=new Handler();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        count=findViewById(R.id.disp);
+        startbtn=findViewById(R.id.start);
+        stopbtn=findViewById(R.id.stop);
+        startbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                i=0;
+                customhandler.postDelayed(update_counter_thread,0);
+            }
+        });
+        stopbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                customhandler.removeCallbacks(update_counter_thread);
+            }
+        });
+    }
+    private final Runnable update_counter_thread=new Runnable() {
+        @Override
+        public void run() {
+            count.setText(""+i);
+            customhandler.postDelayed(this,1000);
+            i++;
+
+        }
+    };
+}
