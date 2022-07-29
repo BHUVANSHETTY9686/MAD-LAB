@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         startbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                i=0;
+               
                 customhandler.postDelayed(update_counter_thread,0);
             }
         });
